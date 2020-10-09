@@ -15,6 +15,8 @@
  * @since 2.7.0
  * @access private
  *
+ * @staticvar WP_Http $http
+ *
  * @return WP_Http HTTP Transport object.
  */
 function _wp_http_get_object() {
@@ -373,7 +375,7 @@ function wp_http_supports( $capabilities = array(), $url = null ) {
 
 	if ( $url && ! isset( $capabilities['ssl'] ) ) {
 		$scheme = parse_url( $url, PHP_URL_SCHEME );
-		if ( 'https' === $scheme || 'ssl' === $scheme ) {
+		if ( 'https' == $scheme || 'ssl' == $scheme ) {
 			$capabilities['ssl'] = true;
 		}
 	}
@@ -457,7 +459,7 @@ function is_allowed_http_origin( $origin = null ) {
 		$origin = get_http_origin();
 	}
 
-	if ( $origin && ! in_array( $origin, get_allowed_http_origins(), true ) ) {
+	if ( $origin && ! in_array( $origin, get_allowed_http_origins() ) ) {
 		$origin = '';
 	}
 
@@ -520,7 +522,7 @@ function wp_http_validate_url( $url ) {
 		return false;
 	}
 
-	$parsed_url = parse_url( $url );
+	$parsed_url = @parse_url( $url );
 	if ( ! $parsed_url || empty( $parsed_url['host'] ) ) {
 		return false;
 	}
@@ -533,7 +535,7 @@ function wp_http_validate_url( $url ) {
 		return false;
 	}
 
-	$parsed_home = parse_url( get_option( 'home' ) );
+	$parsed_home = @parse_url( get_option( 'home' ) );
 
 	if ( isset( $parsed_home['host'] ) ) {
 		$same_host = strtolower( $parsed_home['host'] ) === strtolower( $parsed_url['host'] );
@@ -593,7 +595,7 @@ function wp_http_validate_url( $url ) {
 }
 
 /**
- * Mark allowed redirect hosts safe for HTTP requests as well.
+ * Whitelists allowed redirect hosts for safe HTTP requests as well.
  *
  * Attached to the {@see 'http_request_host_is_external'} filter.
  *
@@ -611,14 +613,14 @@ function allowed_http_request_hosts( $is_external, $host ) {
 }
 
 /**
- * Adds any domain in a multisite installation for safe HTTP requests to the
- * allowed list.
+ * Whitelists any domain in a multisite installation for safe HTTP requests.
  *
  * Attached to the {@see 'http_request_host_is_external'} filter.
  *
  * @since 3.6.0
  *
  * @global wpdb $wpdb WordPress database abstraction object.
+ * @staticvar array $queried
  *
  * @param bool   $is_external
  * @param string $host
@@ -652,6 +654,9 @@ function ms_allowed_http_request_hosts( $is_external, $host ) {
  * in the query are being handled inconsistently. This function works around those
  * differences as well.
  *
+ * Error suppression is used as prior to PHP 5.3.3, an E_WARNING would be generated
+ * when URL parsing failed.
+ *
  * @since 4.4.0
  * @since 4.7.0 The `$component` parameter was added for parity with PHP's `parse_url()`.
  *
@@ -679,7 +684,7 @@ function wp_parse_url( $url, $component = -1 ) {
 		$url        = 'placeholder://placeholder' . $url;
 	}
 
-	$parts = parse_url( $url );
+	$parts = @parse_url( $url );
 
 	if ( false === $parts ) {
 		// Parsing failure.

@@ -15,6 +15,7 @@
  * @param WP_Post|int $post         The post object or post ID.
  * @param int         $compare_from The revision ID to compare from.
  * @param int         $compare_to   The revision ID to come to.
+ *
  * @return array|bool Associative array of a post's revisioned fields and their diffs.
  *                    Or, false on failure.
  */
@@ -160,6 +161,7 @@ function wp_get_revision_ui_diff( $post, $compare_from, $compare_to ) {
  * @param WP_Post|int $post                 The post object or post ID.
  * @param int         $selected_revision_id The selected revision ID.
  * @param int         $from                 Optional. The revision ID to compare from.
+ *
  * @return array An associative array of revision data and related settings.
  */
 function wp_prepare_revisions_for_js( $post, $selected_revision_id, $from = null ) {
@@ -312,7 +314,7 @@ function wp_prepare_revisions_for_js( $post, $selected_revision_id, $from = null
 	// Now, grab the initial diff.
 	$compare_two_mode = is_numeric( $from );
 	if ( ! $compare_two_mode ) {
-		$found = array_search( $selected_revision_id, array_keys( $revisions ), true );
+		$found = array_search( $selected_revision_id, array_keys( $revisions ) );
 		if ( $found ) {
 			$from = array_keys( array_slice( $revisions, $found - 1, 1, true ) );
 			$from = reset( $from );

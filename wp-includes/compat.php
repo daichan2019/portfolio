@@ -20,6 +20,8 @@ if ( ! function_exists( '_' ) ) {
  * @since 4.2.2
  * @access private
  *
+ * @staticvar string $utf8_pcre
+ *
  * @param bool $set - Used for testing only
  *             null   : default - get PCRE/u capability
  *             false  : Used for testing - return false for future calls to this function
@@ -87,7 +89,7 @@ function _mb_substr( $str, $start, $length = null, $encoding = null ) {
 	 * The solution below works only for UTF-8, so in case of a different
 	 * charset just use built-in substr().
 	 */
-	if ( ! in_array( $encoding, array( 'utf8', 'utf-8', 'UTF8', 'UTF-8' ), true ) ) {
+	if ( ! in_array( $encoding, array( 'utf8', 'utf-8', 'UTF8', 'UTF-8' ) ) ) {
 		return is_null( $length ) ? substr( $str, $start ) : substr( $str, $start, $length );
 	}
 
@@ -171,7 +173,7 @@ function _mb_strlen( $str, $encoding = null ) {
 	 * The solution below works only for UTF-8, so in case of a different charset
 	 * just use built-in strlen().
 	 */
-	if ( ! in_array( $encoding, array( 'utf8', 'utf-8', 'UTF8', 'UTF-8' ), true ) ) {
+	if ( ! in_array( $encoding, array( 'utf8', 'utf-8', 'UTF8', 'UTF-8' ) ) ) {
 		return strlen( $str );
 	}
 
@@ -343,6 +345,7 @@ if ( ! function_exists( 'is_countable' ) ) {
 	 * @since 4.9.6
 	 *
 	 * @param mixed $var The value to check.
+	 *
 	 * @return bool True if `$var` is countable, false otherwise.
 	 */
 	function is_countable( $var ) {
@@ -364,6 +367,7 @@ if ( ! function_exists( 'is_iterable' ) ) {
 	 * @since 4.9.6
 	 *
 	 * @param mixed $var The value to check.
+	 *
 	 * @return bool True if `$var` is iterable, false otherwise.
 	 */
 	function is_iterable( $var ) {

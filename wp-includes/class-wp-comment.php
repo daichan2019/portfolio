@@ -114,10 +114,9 @@ final class WP_Comment {
 	 * Comment type.
 	 *
 	 * @since 4.4.0
-	 * @since 5.5.0 Default value changed to `comment`.
 	 * @var string
 	 */
-	public $comment_type = 'comment';
+	public $comment_type = '';
 
 	/**
 	 * Parent comment ID.
@@ -344,7 +343,7 @@ final class WP_Comment {
 	 * @return bool
 	 */
 	public function __isset( $name ) {
-		if ( in_array( $name, $this->post_fields, true ) && 0 !== (int) $this->comment_post_ID ) {
+		if ( in_array( $name, $this->post_fields ) && 0 !== (int) $this->comment_post_ID ) {
 			$post = get_post( $this->comment_post_ID );
 			return property_exists( $post, $name );
 		}
@@ -361,7 +360,7 @@ final class WP_Comment {
 	 * @return mixed
 	 */
 	public function __get( $name ) {
-		if ( in_array( $name, $this->post_fields, true ) ) {
+		if ( in_array( $name, $this->post_fields ) ) {
 			$post = get_post( $this->comment_post_ID );
 			return $post->$name;
 		}

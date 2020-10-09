@@ -82,7 +82,7 @@ this["wp"] = this["wp"] || {}; this["wp"]["apiFetch"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 451);
+/******/ 	return __webpack_require__(__webpack_require__.s = 434);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -94,12 +94,12 @@ this["wp"] = this["wp"] || {}; this["wp"]["apiFetch"] =
 
 /***/ }),
 
-/***/ 15:
+/***/ 19:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _objectWithoutProperties; });
-/* harmony import */ var _objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
+/* harmony import */ var _objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
 
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
@@ -122,21 +122,21 @@ function _objectWithoutProperties(source, excluded) {
 
 /***/ }),
 
-/***/ 24:
+/***/ 23:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["regeneratorRuntime"]; }());
 
 /***/ }),
 
-/***/ 31:
+/***/ 30:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["url"]; }());
 
 /***/ }),
 
-/***/ 41:
+/***/ 43:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -158,18 +158,17 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 /***/ }),
 
-/***/ 451:
+/***/ 434:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js
-var objectWithoutProperties = __webpack_require__(15);
+var objectWithoutProperties = __webpack_require__(19);
 
 // EXTERNAL MODULE: external {"this":["wp","i18n"]}
 var external_this_wp_i18n_ = __webpack_require__(1);
@@ -343,14 +342,14 @@ function createPreloadingMiddleware(preloadedData) {
 /* harmony default export */ var preloading = (createPreloadingMiddleware);
 
 // EXTERNAL MODULE: external {"this":"regeneratorRuntime"}
-var external_this_regeneratorRuntime_ = __webpack_require__(24);
+var external_this_regeneratorRuntime_ = __webpack_require__(23);
 var external_this_regeneratorRuntime_default = /*#__PURE__*/__webpack_require__.n(external_this_regeneratorRuntime_);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(50);
+var asyncToGenerator = __webpack_require__(49);
 
 // EXTERNAL MODULE: external {"this":["wp","url"]}
-var external_this_wp_url_ = __webpack_require__(31);
+var external_this_wp_url_ = __webpack_require__(30);
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/api-fetch/build-module/middlewares/fetch-all-middleware.js
 
@@ -365,11 +364,6 @@ function fetch_all_middleware_objectSpread(target) { for (var i = 1; i < argumen
 /**
  * WordPress dependencies
  */
-
-/**
- * Internal dependencies
- */
-
  // Apply query arguments to both URL and Path, whichever is present.
 
 var fetch_all_middleware_modifyQuery = function modifyQuery(_ref, queryArgs) {
@@ -415,8 +409,12 @@ var requestContainsUnboundedQuery = function requestContainsUnboundedQuery(optio
 // then recursively assemble a full response array from all available pages.
 
 
-var fetchAllMiddleware = /*#__PURE__*/function () {
-  var _ref2 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/external_this_regeneratorRuntime_default.a.mark(function _callee(options, next) {
+var fetchAllMiddleware =
+/*#__PURE__*/
+function () {
+  var _ref2 = Object(asyncToGenerator["a" /* default */])(
+  /*#__PURE__*/
+  external_this_regeneratorRuntime_default.a.mark(function _callee(options, next) {
     var response, results, nextPage, mergedResults, nextResponse, nextResults;
     return external_this_regeneratorRuntime_default.a.wrap(function _callee$(_context) {
       while (1) {
@@ -439,7 +437,7 @@ var fetchAllMiddleware = /*#__PURE__*/function () {
 
           case 4:
             _context.next = 6;
-            return build_module(fetch_all_middleware_objectSpread({}, fetch_all_middleware_modifyQuery(options, {
+            return next(fetch_all_middleware_objectSpread({}, fetch_all_middleware_modifyQuery(options, {
               per_page: 100
             }), {
               // Ensure headers are returned for page 1.
@@ -482,7 +480,7 @@ var fetchAllMiddleware = /*#__PURE__*/function () {
             }
 
             _context.next = 19;
-            return build_module(fetch_all_middleware_objectSpread({}, options, {
+            return next(fetch_all_middleware_objectSpread({}, options, {
               // Ensure the URL for the next page is used instead of any provided path.
               path: undefined,
               url: nextPage,
@@ -915,29 +913,7 @@ apiFetch.mediaUploadMiddleware = media_upload;
 
 /***/ }),
 
-/***/ 5:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _defineProperty; });
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-/***/ }),
-
-/***/ 50:
+/***/ 49:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -976,6 +952,28 @@ function _asyncToGenerator(fn) {
       _next(undefined);
     });
   };
+}
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _defineProperty; });
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 /***/ })

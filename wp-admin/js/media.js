@@ -10,7 +10,7 @@
  * @requires jQuery
  */
 
-/* global ajaxurl, _wpMediaGridSettings, showNotice, findPosts */
+/* global ajaxurl, attachMediaBoxL10n, _wpMediaGridSettings, showNotice, findPosts */
 
 ( function( $ ){
 	window.findPosts = {
@@ -124,12 +124,12 @@
 				spinner.removeClass( 'is-active' );
 			}).done( function( x ) {
 				if ( ! x.success ) {
-					$( '#find-posts-response' ).text( wp.i18n.__( 'An error has occurred. Please reload the page and try again.' ) );
+					$( '#find-posts-response' ).text( attachMediaBoxL10n.error );
 				}
 
 				$( '#find-posts-response' ).html( x.data );
 			}).fail( function() {
-				$( '#find-posts-response' ).text( wp.i18n.__( 'An error has occurred. Please reload the page and try again.' ) );
+				$( '#find-posts-response' ).text( attachMediaBoxL10n.error );
 			});
 		}
 	};
@@ -147,14 +147,11 @@
 		if ( $mediaGridWrap.length && window.wp && window.wp.media ) {
 			settings = _wpMediaGridSettings;
 
-			var frame = window.wp.media({
+			window.wp.media({
 				frame: 'manage',
 				container: $mediaGridWrap,
 				library: settings.queryVars
 			}).open();
-
-			// Fire a global ready event.
-			$mediaGridWrap.trigger( 'wp-media-grid-ready', frame );
 		}
 
 		// Prevents form submission if no post has been selected.

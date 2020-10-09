@@ -6,15 +6,14 @@
  * @output wp-admin/js/edit-comments.js
  */
 
-/* global adminCommentsSettings, thousandsSeparator, list_args, QTags, ajaxurl, wpAjax */
+/* global adminCommentsL10n, thousandsSeparator, list_args, QTags, ajaxurl, wpAjax */
 /* global commentReply, theExtraList, theList, setCommentsList */
 
 (function($) {
 var getCount, updateCount, updateCountText, updatePending, updateApproved,
 	updateHtmlTitle, updateDashboardText, updateInModerationText, adminTitle = document.title,
 	isDashboard = $('#dashboard_right_now').length,
-	titleDiv, titleRegEx,
-	__ = wp.i18n.__;
+	titleDiv, titleRegEx;
 
 	/**
 	 * Extracts a number from the content of a jQuery element.
@@ -159,7 +158,7 @@ var getCount, updateCount, updateCountText, updatePending, updateApproved,
 	 *
 	 * @since 5.2.0
 	 *
-	 * @param {Object} response Ajax response from the server that includes a
+	 * @param {object} response Ajax response from the server that includes a
 	 *                          translated "comments in moderation" message.
 	 *
 	 * @return {void}
@@ -192,8 +191,7 @@ var getCount, updateCount, updateCountText, updatePending, updateApproved,
 	updateHtmlTitle = function( diff ) {
 		var newTitle, regExMatch, titleCount, commentFrag;
 
-		/* translators: %s: Comments count. */
-		titleRegEx = titleRegEx || new RegExp( __( 'Comments (%s)' ).replace( '%s', '\\([0-9' + thousandsSeparator + ']+\\)' ) + '?' );
+		titleRegEx = titleRegEx || new RegExp( adminCommentsL10n.docTitleCommentsCount.replace( '%s', '\\([0-9' + thousandsSeparator + ']+\\)' ) + '?' );
 		// Count funcs operate on a $'d element.
 		titleDiv = titleDiv || $( '<div />' );
 		newTitle = adminTitle;
@@ -212,13 +210,12 @@ var getCount, updateCount, updateCountText, updatePending, updateApproved,
 			updateCount( titleDiv, titleCount );
 			regExMatch = titleRegEx.exec( document.title );
 			if ( regExMatch ) {
-				/* translators: %s: Comments count. */
-				newTitle = document.title.replace( regExMatch[0], __( 'Comments (%s)' ).replace( '%s', titleDiv.text() ) + ' ' );
+				newTitle = document.title.replace( regExMatch[0], adminCommentsL10n.docTitleCommentsCount.replace( '%s', titleDiv.text() ) + ' ' );
 			}
 		} else {
 			regExMatch = titleRegEx.exec( newTitle );
 			if ( regExMatch ) {
-				newTitle = newTitle.replace( regExMatch[0], __( 'Comments' ) );
+				newTitle = newTitle.replace( regExMatch[0], adminCommentsL10n.docTitleComments );
 			}
 		}
 		document.title = newTitle;
@@ -363,14 +360,14 @@ window.setCommentsList = function() {
 
 		if ( c.is('.unapproved') ) {
 			if ( settings.data.id == replyID )
-				replyButton.text( __( 'Approve and Reply' ) );
+				replyButton.text(adminCommentsL10n.replyApprove);
 
 			c.find( '.row-actions span.view' ).addClass( 'hidden' ).end()
 				.find( 'div.comment_status' ).html( '0' );
 
 		} else {
 			if ( settings.data.id == replyID )
-				replyButton.text( __( 'Reply' ) );
+				replyButton.text(adminCommentsL10n.reply);
 
 			c.find( '.row-actions span.view' ).removeClass( 'hidden' ).end()
 				.find( 'div.comment_status' ).html( '1' );
@@ -849,7 +846,7 @@ window.commentReply = {
 	 * @return {void}
 	 */
 	toggle : function(el) {
-		if ( 'none' !== $( el ).css( 'display' ) && ( $( '#replyrow' ).parent().is('#com-reply') || window.confirm( __( 'Are you sure you want to edit this comment?\nThe changes you made will be lost.' ) ) ) ) {
+		if ( 'none' !== $( el ).css( 'display' ) && ( $( '#replyrow' ).parent().is('#com-reply') || window.confirm( adminCommentsL10n.warnQuickEdit ) ) ) {
 			$( el ).find( 'button.vim-q' ).click();
 		}
 	},
@@ -942,8 +939,8 @@ window.commentReply = {
 	 *
 	 * @memberof commentReply
 	 *
-	 * @param {number} comment_id The comment ID to open an editor for.
-	 * @param {number} post_id The post ID to open an editor for.
+	 * @param {number} comment_id The comment id to open an editor for.
+	 * @param {number} post_id The post id to open an editor for.
 	 * @param {string} action The action to perform. Either 'edit' or 'replyto'.
 	 *
 	 * @return {boolean} Always false.
@@ -1010,9 +1007,9 @@ window.commentReply = {
 			c.after(editRow);
 
 			if ( c.hasClass('unapproved') ) {
-				replyButton.text( __( 'Approve and Reply' ) );
+				replyButton.text(adminCommentsL10n.replyApprove);
 			} else {
-				replyButton.text( __( 'Reply' ) );
+				replyButton.text(adminCommentsL10n.reply);
 			}
 
 			$('#replyrow').fadeIn(300, function(){ $(this).show(); });
@@ -1189,7 +1186,7 @@ window.commentReply = {
 	 *
 	 * @memberof commentReply
 	 *
-	 * @param {number} post_id The post ID.
+	 * @param {number} post_id The post id.
 	 *
 	 * @return {void}
 	 */
@@ -1220,7 +1217,7 @@ window.commentReply = {
 			return true;
 		}
 
-		return window.confirm( __( 'Are you sure you want to do this?\nThe comment changes you made will be lost.' ) );
+		return window.confirm( adminCommentsL10n.warnCommentChanges );
 	}
 };
 
@@ -1315,8 +1312,8 @@ $(document).ready(function(){
 				['shift+u', make_bulk('unapprove')]
 			],
 			{
-				highlight_first: adminCommentsSettings.hotkeys_highlight_first,
-				highlight_last: adminCommentsSettings.hotkeys_highlight_last,
+				highlight_first: adminCommentsL10n.hotkeys_highlight_first,
+				highlight_last: adminCommentsL10n.hotkeys_highlight_last,
 				prev_page_link_cb: make_hotkeys_redirect('prev'),
 				next_page_link_cb: make_hotkeys_redirect('next'),
 				hotkeys_opts: {

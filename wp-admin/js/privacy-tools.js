@@ -6,8 +6,7 @@
 
 // Privacy request action handling.
 jQuery( document ).ready( function( $ ) {
-	var __ = wp.i18n.__,
-		copiedNoticeTimeout;
+	var strings = window.privacyToolsL10n || {};
 
 	function setActionState( $action, state ) {
 		$action.children().addClass( 'hidden' );
@@ -77,7 +76,7 @@ jQuery( document ).ready( function( $ ) {
 		setExportProgress( 0 );
 
 		function onExportDoneSuccess( zipUrl ) {
-			var summaryMessage = __( 'The personal data export link for this user was sent.' );
+			var summaryMessage = strings.emailSent;
 
 			setActionState( $action, 'export-personal-data-success' );
 
@@ -86,28 +85,24 @@ jQuery( document ).ready( function( $ ) {
 			if ( 'undefined' !== typeof zipUrl ) {
 				window.location = zipUrl;
 			} else if ( ! sendAsEmail ) {
-				onExportFailure( __( 'No personal data export file was generated.' ) );
+				onExportFailure( strings.noExportFile );
 			}
 
-			setTimeout( function() { $rowActions.removeClass( 'processing' ); }, 500 );
+			setTimeout( function(){ $rowActions.removeClass( 'processing' ); }, 500 );
 		}
 
 		function onExportFailure( errorMessage ) {
-			var summaryMessage = __( 'An error occurred while attempting to export personal data.' );
-
 			setActionState( $action, 'export-personal-data-failed' );
-
 			if ( errorMessage ) {
-				appendResultsAfterRow( $requestRow, 'notice-error', summaryMessage, [ errorMessage ] );
+				appendResultsAfterRow( $requestRow, 'notice-error', strings.exportError, [ errorMessage ] );
 			}
 
-			setTimeout( function() { $rowActions.removeClass( 'processing' ); }, 500 );
+			setTimeout( function(){ $rowActions.removeClass( 'processing' ); }, 500 );
 		}
 
 		function setExportProgress( exporterIndex ) {
-			var progress       = ( exportersCount > 0 ? exporterIndex / exportersCount : 0 ),
-				progressString = Math.round( progress * 100 ).toString() + '%';
-
+			var progress       = ( exportersCount > 0 ? exporterIndex / exportersCount : 0 );
+			var progressString = Math.round( progress * 100 ).toString() + '%';
 			$progress.html( progressString );
 		}
 
@@ -130,7 +125,7 @@ jQuery( document ).ready( function( $ ) {
 
 				if ( ! response.success ) {
 					// e.g. invalid request ID.
-					setTimeout( function() { onExportFailure( response.data ); }, 500 );
+					setTimeout( function(){ onExportFailure( response.data ); }, 500 );
 					return;
 				}
 
@@ -141,12 +136,12 @@ jQuery( document ).ready( function( $ ) {
 					if ( exporterIndex < exportersCount ) {
 						setTimeout( doNextExport( exporterIndex + 1, 1 ) );
 					} else {
-						setTimeout( function() { onExportDoneSuccess( responseData.url ); }, 500 );
+						setTimeout( function(){ onExportDoneSuccess( responseData.url ); }, 500 );
 					}
 				}
 			}).fail( function( jqxhr, textStatus, error ) {
 				// e.g. Nonce failure.
-				setTimeout( function() { onExportFailure( error ); }, 500 );
+				setTimeout( function(){ onExportFailure( error ); }, 500 );
 			});
 		}
 
@@ -178,45 +173,41 @@ jQuery( document ).ready( function( $ ) {
 		setErasureProgress( 0 );
 
 		function onErasureDoneSuccess() {
-			var summaryMessage = __( 'No personal data was found for this user.' ),
-				classes = 'notice-success';
+			var summaryMessage = strings.noDataFound;
+			var classes = 'notice-success';
 
 			setActionState( $action, 'remove-personal-data-success' );
 
 			if ( false === hasRemoved ) {
 				if ( false === hasRetained ) {
-					summaryMessage = __( 'No personal data was found for this user.' );
+					summaryMessage = strings.noDataFound;
 				} else {
-					summaryMessage = __( 'Personal data was found for this user but was not erased.' );
+					summaryMessage = strings.noneRemoved;
 					classes = 'notice-warning';
 				}
 			} else {
 				if ( false === hasRetained ) {
-					summaryMessage = __( 'All of the personal data found for this user was erased.' );
+					summaryMessage = strings.foundAndRemoved;
 				} else {
-					summaryMessage = __( 'Personal data was found for this user but some of the personal data found was not erased.' );
+					summaryMessage = strings.someNotRemoved;
 					classes = 'notice-warning';
 				}
 			}
 			appendResultsAfterRow( $requestRow, classes, summaryMessage, messages );
 
-			setTimeout( function() { $rowActions.removeClass( 'processing' ); }, 500 );
+			setTimeout( function(){ $rowActions.removeClass( 'processing' ); }, 500 );
 		}
 
 		function onErasureFailure() {
-			var summaryMessage = __( 'An error occurred while attempting to find and erase personal data.' );
-
 			setActionState( $action, 'remove-personal-data-failed' );
+			appendResultsAfterRow( $requestRow, 'notice-error', strings.removalError, [] );
 
-			appendResultsAfterRow( $requestRow, 'notice-error', summaryMessage, [] );
-
-			setTimeout( function() { $rowActions.removeClass( 'processing' ); }, 500 );
+			setTimeout( function(){ $rowActions.removeClass( 'processing' ); }, 500 );
 		}
 
 		function setErasureProgress( eraserIndex ) {
-			var progress       = ( erasersCount > 0 ? eraserIndex / erasersCount : 0 ),
-				progressString = Math.round( progress * 100 ).toString() + '%';
-
+			var progress       = ( erasersCount > 0 ? eraserIndex / erasersCount : 0 );
+			var progressString = Math.round( progress * 100 ).toString() + '%';
 			$progress.html( progressString );
 		}
 
@@ -235,7 +226,7 @@ jQuery( document ).ready( function( $ ) {
 				var responseData = response.data;
 
 				if ( ! response.success ) {
-					setTimeout( function() { onErasureFailure(); }, 500 );
+					setTimeout( function(){ onErasureFailure(); }, 500 );
 					return;
 				}
 				if ( responseData.items_removed ) {
@@ -254,11 +245,11 @@ jQuery( document ).ready( function( $ ) {
 					if ( eraserIndex < erasersCount ) {
 						setTimeout( doNextErasure( eraserIndex + 1, 1 ) );
 					} else {
-						setTimeout( function() { onErasureDoneSuccess(); }, 500 );
+						setTimeout( function(){ onErasureDoneSuccess(); }, 500 );
 					}
 				}
 			}).fail( function() {
-				setTimeout( function() { onErasureFailure(); }, 500 );
+				setTimeout( function(){ onErasureFailure(); }, 500 );
 			});
 		}
 
@@ -268,15 +259,10 @@ jQuery( document ).ready( function( $ ) {
 		doNextErasure( 1, 1 );
 	});
 
-	// Privacy Policy page, copy action.
+	// Privacy policy page, copy button.
 	$( document ).on( 'click', function( event ) {
-		var $parent,
-			$container,
-			range,
-			$target = $( event.target ),
-			copiedNotice = $target.siblings( '.success' );
-
-		clearTimeout( copiedNoticeTimeout );
+		var $target = $( event.target );
+		var $parent, $container, range;
 
 		if ( $target.is( 'button.privacy-text-copy' ) ) {
 			$parent = $target.parent().parent();
@@ -291,39 +277,25 @@ jQuery( document ).ready( function( $ ) {
 					var documentPosition = document.documentElement.scrollTop,
 						bodyPosition     = document.body.scrollTop;
 
-					// Setup copy.
 					window.getSelection().removeAllRanges();
-
-					// Hide tutorial content to remove from copied content.
 					range = document.createRange();
 					$container.addClass( 'hide-privacy-policy-tutorial' );
 
-					// Copy action.
 					range.selectNodeContents( $container[0] );
 					window.getSelection().addRange( range );
 					document.execCommand( 'copy' );
 
-					// Reset section.
 					$container.removeClass( 'hide-privacy-policy-tutorial' );
 					window.getSelection().removeAllRanges();
 
-					// Return scroll position - see #49540.
 					if ( documentPosition > 0 && documentPosition !== document.documentElement.scrollTop ) {
 						document.documentElement.scrollTop = documentPosition;
 					} else if ( bodyPosition > 0 && bodyPosition !== document.body.scrollTop ) {
 						document.body.scrollTop = bodyPosition;
 					}
-
-					// Display and speak notice to indicate action complete.
-					copiedNotice.addClass( 'visible' );
-					wp.a11y.speak( __( 'The section has been copied to your clipboard.' ) );
-
-					// Delay notice dismissal.
-					copiedNoticeTimeout = setTimeout( function() {
-						copiedNotice.removeClass( 'visible' );
-					}, 3000 );
 				} catch ( er ) {}
 			}
 		}
 	});
 });
+

@@ -72,9 +72,7 @@
 }
 
 .wp-picker-input-wrap .button.wp-picker-default,
-.wp-picker-input-wrap .button.wp-picker-clear,
-.wp-customizer .wp-picker-input-wrap .button.wp-picker-default,
-.wp-customizer .wp-picker-input-wrap .button.wp-picker-clear {
+.wp-customizer .wp-picker-input-wrap .button.wp-picker-default {
 	margin-right: 6px;
 	padding: 0 8px;
 	line-height: 2.54545455; /* 28px */
@@ -145,15 +143,13 @@
 		padding: 0 5px;
 	}
 
-	.wp-picker-input-wrap .button.wp-picker-default,
-	.wp-picker-input-wrap .button.wp-picker-clear {
+	.wp-picker-input-wrap .button.wp-picker-default {
 		padding: 0 8px;
 		line-height: 2.14285714; /* 30px */
 		min-height: 32px;
 	}
 
-	.wp-customizer .wp-picker-input-wrap .button.wp-picker-default,
-	.wp-customizer .wp-picker-input-wrap .button.wp-picker-clear {
+	.wp-customizer .wp-picker-input-wrap .button.wp-picker-default {
 		padding: 0 8px;
 		font-size: 14px;
 		line-height: 2.14285714; /* 30px */

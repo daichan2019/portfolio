@@ -95,8 +95,8 @@ class WP_Roles {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param string $name      Method to call.
-	 * @param array  $arguments Arguments to pass when calling.
+	 * @param string   $name      Method to call.
+	 * @param array    $arguments Arguments to pass when calling.
 	 * @return mixed|false Return value of the callback, false otherwise.
 	 */
 	public function __call( $name, $arguments ) {
@@ -200,10 +200,9 @@ class WP_Roles {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param string $role  Role name.
-	 * @param string $cap   Capability name.
-	 * @param bool   $grant Optional. Whether role is capable of performing capability.
-	 *                      Default true.
+	 * @param string $role Role name.
+	 * @param string $cap Capability name.
+	 * @param bool $grant Optional, default is true. Whether role is capable of performing capability.
 	 */
 	public function add_cap( $role, $cap, $grant = true ) {
 		if ( ! isset( $this->roles[ $role ] ) ) {
@@ -222,7 +221,7 @@ class WP_Roles {
 	 * @since 2.0.0
 	 *
 	 * @param string $role Role name.
-	 * @param string $cap  Capability name.
+	 * @param string $cap Capability name.
 	 */
 	public function remove_cap( $role, $cap ) {
 		if ( ! isset( $this->roles[ $role ] ) ) {

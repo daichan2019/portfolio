@@ -28,16 +28,9 @@ themes.Model = Backbone.Model.extend({
 	initialize: function() {
 		var description;
 
-		if ( this.get( 'slug' ) ) {
-			// If the theme is already installed, set an attribute.
-			if ( _.indexOf( themes.data.installedThemes, this.get( 'slug' ) ) !== -1 ) {
-				this.set({ installed: true });
-			}
-
-			// If the theme is active, set an attribute.
-			if ( themes.data.activeTheme === this.get( 'slug' ) ) {
-				this.set({ active: true });
-			}
+		// If theme is already installed, set an attribute.
+		if ( _.indexOf( themes.data.installedThemes, this.get( 'slug' ) ) !== -1 ) {
+			this.set({ installed: true });
 		}
 
 		// Set the attributes.
@@ -270,7 +263,7 @@ themes.Collection = Backbone.Collection.extend({
 		// it means we have a paginated request.
 		isPaginated = _.has( request, 'page' );
 
-		// Reset the internal api page counter for non-paginated queries.
+		// Reset the internal api page counter for non paginated queries.
 		if ( ! isPaginated ) {
 			this.currentQuery.page = 1;
 		}
@@ -673,8 +666,7 @@ themes.view.Details = wp.Backbone.View.extend({
 		'click .delete-theme': 'deleteTheme',
 		'click .left': 'previousTheme',
 		'click .right': 'nextTheme',
-		'click #update-theme': 'updateTheme',
-		'click .toggle-auto-update': 'autoupdateState'
+		'click #update-theme': 'updateTheme'
 	},
 
 	// The HTML template for the theme overlay.
@@ -793,26 +785,6 @@ themes.view.Details = wp.Backbone.View.extend({
 		this.remove();
 		this.unbind();
 		this.trigger( 'theme:collapse' );
-	},
-
-	// Set state of the auto-update settings link after it has been changed and saved.
-	autoupdateState: function() {
-		var callback,
-			_this = this;
-
-		// Support concurrent clicks in different Theme Details overlays.
-		callback = function( event, data ) {
-			var autoupdate;
-			if ( _this.model.get( 'id' ) === data.asset ) {
-				autoupdate = _this.model.get( 'autoupdate' );
-				autoupdate.enabled = 'enable' === data.state;
-				_this.model.set( { autoupdate: autoupdate } );
-				$( document ).off( 'wp-auto-update-setting-changed', callback );
-			}
-		};
-
-		// Triggered in updates.js
-		$( document ).on( 'wp-auto-update-setting-changed', callback );
 	},
 
 	updateTheme: function( event ) {
@@ -1431,7 +1403,7 @@ themes.view.Search = wp.Backbone.View.extend({
  * @since 4.9.0
  *
  * @param {string} url - URL to navigate to.
- * @param {Object} state - State.
+ * @param {object} state - State.
  * @return {void}
  */
 function navigateRouter( url, state ) {
@@ -1844,7 +1816,7 @@ themes.view.Installer = themes.view.Appearance.extend({
 	/**
 	 * Get the checked filters.
 	 *
-	 * @return {Array} of tags or false
+	 * @return {array} of tags or false
 	 */
 	filtersChecked: function() {
 		var items = $( '.filter-group' ).find( ':checkbox' ),

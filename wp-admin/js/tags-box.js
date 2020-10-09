@@ -6,7 +6,7 @@
 /* global ajaxurl, tagBox, array_unique_noempty */
 
 ( function( $ ) {
-	var tagDelimiter = wp.i18n._x( ',', 'tag delimiter' ) || ',';
+	var tagDelimiter = ( window.tagsSuggestL10n && window.tagsSuggestL10n.tagDelimiter ) || ',';
 
 	/**
 	 * Filters unique items and returns a new array.
@@ -164,7 +164,7 @@
 					 */
 					xbutton = $( '<button type="button" id="' + id + '-check-num-' + key + '" class="ntdelbutton">' +
 						'<span class="remove-tag-icon" aria-hidden="true"></span>' +
-						'<span class="screen-reader-text">' + wp.i18n.__( 'Remove term:' ) + ' ' + listItem.html() + '</span>' +
+						'<span class="screen-reader-text">' + window.tagsSuggestL10n.removeTerm + ' ' + listItem.html() + '</span>' +
 						'</button>' );
 
 					/**
@@ -284,8 +284,8 @@
 			 *
 			 * @since 2.9.0
 			 *
-			 * @param {number|string} r The response message from the Ajax call.
-			 * @param {string} stat The status of the Ajax request.
+			 * @param {number|string} r The response message from the AJAX call.
+			 * @param {string} stat The status of the AJAX request.
 			 *
 			 * @return {void}
 			 */
@@ -334,11 +334,11 @@
 
 			switch ( this.userAction ) {
 				case 'remove':
-					message = wp.i18n.__( 'Term removed.' );
+					message = window.tagsSuggestL10n.termRemoved;
 					break;
 
 				case 'add':
-					message = wp.i18n.__( 'Term added.' );
+					message = window.tagsSuggestL10n.termAdded;
 					break;
 
 				default:

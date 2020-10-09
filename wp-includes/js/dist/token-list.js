@@ -82,12 +82,12 @@ this["wp"] = this["wp"] || {}; this["wp"]["tokenList"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 432);
+/******/ 	return __webpack_require__(__webpack_require__.s = 416);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 19:
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,14 +110,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 
 /***/ }),
 
-/***/ 2:
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["lodash"]; }());
-
-/***/ }),
-
-/***/ 20:
+/***/ 14:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -130,23 +123,30 @@ function _classCallCheck(instance, Constructor) {
 
 /***/ }),
 
-/***/ 24:
+/***/ 2:
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["lodash"]; }());
+
+/***/ }),
+
+/***/ 23:
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["regeneratorRuntime"]; }());
 
 /***/ }),
 
-/***/ 432:
+/***/ 416:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TokenList; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
-/* harmony import */ var _babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19);
+/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
+/* harmony import */ var _babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -163,88 +163,40 @@ __webpack_require__.r(__webpack_exports__);
  * @see https://dom.spec.whatwg.org/#domtokenlist
  */
 
-var TokenList = /*#__PURE__*/function () {
+var TokenList =
+/*#__PURE__*/
+function () {
   /**
    * Constructs a new instance of TokenList.
    *
    * @param {string} initialValue Initial value to assign.
    */
   function TokenList() {
+    var _this = this;
+
     var initialValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
     Object(_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(this, TokenList);
 
-    this.value = initialValue; // Disable reason: These are type hints on the class.
+    this.value = initialValue;
+    ['entries', 'forEach', 'keys', 'values'].forEach(function (fn) {
+      _this[fn] = function () {
+        var _this$_valueAsArray;
 
-    /* eslint-disable no-unused-expressions */
-
-    /** @type {string} */
-
-    this._currentValue;
-    /** @type {string[]} */
-
-    this._valueAsArray;
-    /* eslint-enable no-unused-expressions */
-  } // Disable reason: JSDoc lint doesn't understand TypeScript types
-
-  /* eslint-disable jsdoc/valid-types */
-
+        return (_this$_valueAsArray = _this._valueAsArray)[fn].apply(_this$_valueAsArray, arguments);
+      };
+    });
+  }
   /**
-   * @param {Parameters<Array<string>['entries']>} args
+   * Returns the associated set as string.
+   *
+   * @see https://dom.spec.whatwg.org/#dom-domtokenlist-value
+   *
+   * @return {string} Token set as string.
    */
 
 
   Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(TokenList, [{
-    key: "entries",
-    value: function entries() {
-      var _this$_valueAsArray;
-
-      return (_this$_valueAsArray = this._valueAsArray).entries.apply(_this$_valueAsArray, arguments);
-    }
-    /**
-     * @param {Parameters<Array<string>['forEach']>} args
-     */
-
-  }, {
-    key: "forEach",
-    value: function forEach() {
-      var _this$_valueAsArray2;
-
-      return (_this$_valueAsArray2 = this._valueAsArray).forEach.apply(_this$_valueAsArray2, arguments);
-    }
-    /**
-     * @param {Parameters<Array<string>['keys']>} args
-     */
-
-  }, {
-    key: "keys",
-    value: function keys() {
-      var _this$_valueAsArray3;
-
-      return (_this$_valueAsArray3 = this._valueAsArray).keys.apply(_this$_valueAsArray3, arguments);
-    }
-    /**
-     * @param {Parameters<Array<string>['values']>} args
-     */
-
-  }, {
-    key: "values",
-    value: function values() {
-      var _this$_valueAsArray4;
-
-      return (_this$_valueAsArray4 = this._valueAsArray).values.apply(_this$_valueAsArray4, arguments);
-    }
-    /* eslint-enable jsdoc/valid-types */
-
-    /**
-     * Returns the associated set as string.
-     *
-     * @see https://dom.spec.whatwg.org/#dom-domtokenlist-value
-     *
-     * @return {string} Token set as string.
-     */
-
-  }, {
     key: "toString",
 
     /**
@@ -268,7 +220,9 @@ var TokenList = /*#__PURE__*/function () {
 
   }, {
     key: Symbol.iterator,
-    value: /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function value() {
+    value:
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function value() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function value$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {

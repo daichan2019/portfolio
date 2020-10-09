@@ -18,7 +18,6 @@
  * are retrieved for use in the feeds.
  *
  * @since 1.5.1
- *
  * @see get_bloginfo() For the list of possible values to display.
  *
  * @param string $show See get_bloginfo() for possible values.
@@ -48,7 +47,6 @@ function get_bloginfo_rss( $show = '' ) {
  * are retrieved for use in the feeds.
  *
  * @since 0.71
- *
  * @see get_bloginfo() For the list of possible values to display.
  *
  * @param string $show See get_bloginfo() for possible values.
@@ -87,8 +85,7 @@ function get_default_feed() {
 	 *                          Default 'rss2'.
 	 */
 	$default_feed = apply_filters( 'default_feed', 'rss2' );
-
-	return ( 'rss' === $default_feed ) ? 'rss2' : $default_feed;
+	return 'rss' == $default_feed ? 'rss2' : $default_feed;
 }
 
 /**
@@ -163,7 +160,8 @@ function get_the_title_rss() {
 	 *
 	 * @param string $title The current post title.
 	 */
-	return apply_filters( 'the_title_rss', $title );
+	$title = apply_filters( 'the_title_rss', $title );
+	return $title;
 }
 
 /**
@@ -179,7 +177,6 @@ function the_title_rss() {
  * Retrieve the post content for feeds.
  *
  * @since 2.9.0
- *
  * @see get_the_content()
  *
  * @param string $feed_type The type of feed. rss2 | atom | rss | rdf
@@ -193,7 +190,6 @@ function get_the_content_feed( $feed_type = null ) {
 	/** This filter is documented in wp-includes/post-template.php */
 	$content = apply_filters( 'the_content', get_the_content() );
 	$content = str_replace( ']]>', ']]&gt;', $content );
-
 	/**
 	 * Filters the post content for use in feeds.
 	 *
@@ -272,7 +268,7 @@ function comments_link_feed() {
  *
  * @since 2.5.0
  *
- * @param int|WP_Comment $comment_id Optional comment object or ID. Defaults to global comment object.
+ * @param int|WP_Comment $comment_id Optional comment object or id. Defaults to global comment object.
  */
 function comment_guid( $comment_id = null ) {
 	echo esc_url( get_comment_guid( $comment_id ) );
@@ -283,7 +279,7 @@ function comment_guid( $comment_id = null ) {
  *
  * @since 2.5.0
  *
- * @param int|WP_Comment $comment_id Optional comment object or ID. Defaults to global comment object.
+ * @param int|WP_Comment $comment_id Optional comment object or id. Defaults to global comment object.
  * @return string|false GUID for comment on success, false on failure.
  */
 function get_comment_guid( $comment_id = null ) {
@@ -302,7 +298,7 @@ function get_comment_guid( $comment_id = null ) {
  * @since 1.5.0
  * @since 4.4.0 Introduced the `$comment` argument.
  *
- * @param int|WP_Comment $comment Optional. Comment object or ID. Defaults to global comment object.
+ * @param int|WP_Comment $comment Optional. Comment object or id. Defaults to global comment object.
  */
 function comment_link( $comment = null ) {
 	/**
@@ -386,7 +382,7 @@ function get_the_category_rss( $type = null ) {
 	$cat_names  = array();
 
 	$filter = 'rss';
-	if ( 'atom' === $type ) {
+	if ( 'atom' == $type ) {
 		$filter = 'raw';
 	}
 
@@ -405,9 +401,9 @@ function get_the_category_rss( $type = null ) {
 	$cat_names = array_unique( $cat_names );
 
 	foreach ( $cat_names as $cat_name ) {
-		if ( 'rdf' === $type ) {
+		if ( 'rdf' == $type ) {
 			$the_list .= "\t\t<dc:subject><![CDATA[$cat_name]]></dc:subject>\n";
-		} elseif ( 'atom' === $type ) {
+		} elseif ( 'atom' == $type ) {
 			$the_list .= sprintf( '<category scheme="%1$s" term="%2$s" />', esc_attr( get_bloginfo_rss( 'url' ) ), esc_attr( $cat_name ) );
 		} else {
 			$the_list .= "\t\t<category><![CDATA[" . html_entity_decode( $cat_name, ENT_COMPAT, get_option( 'blog_charset' ) ) . "]]></category>\n";
@@ -430,7 +426,6 @@ function get_the_category_rss( $type = null ) {
  * Display the post categories in the feed.
  *
  * @since 0.71
- *
  * @see get_the_category_rss() For better explanation.
  *
  * @param string $type Optional, default is the type returned by get_default_feed().
@@ -519,36 +514,6 @@ function atom_enclosure() {
 		if ( 'enclosure' === $key ) {
 			foreach ( (array) $val as $enc ) {
 				$enclosure = explode( "\n", $enc );
-
-				$url    = '';
-				$type   = '';
-				$length = 0;
-
-				$mimes = get_allowed_mime_types();
-
-				// Parse URL.
-				if ( isset( $enclosure[0] ) && is_string( $enclosure[0] ) ) {
-					$url = trim( $enclosure[0] );
-				}
-
-				// Parse length and type.
-				for ( $i = 1; $i <= 2; $i++ ) {
-					if ( isset( $enclosure[ $i ] ) ) {
-						if ( is_numeric( $enclosure[ $i ] ) ) {
-							$length = trim( $enclosure[ $i ] );
-						} elseif ( in_array( $enclosure[ $i ], $mimes, true ) ) {
-							$type = trim( $enclosure[ $i ] );
-						}
-					}
-				}
-
-				$html_link_tag = sprintf(
-					"<link href=\"%s\" rel=\"enclosure\" length=\"%d\" type=\"%s\" />\n",
-					esc_url( $url ),
-					esc_attr( $length ),
-					esc_attr( $type )
-				);
-
 				/**
 				 * Filters the atom enclosure HTML link tag for the current post.
 				 *
@@ -556,7 +521,7 @@ function atom_enclosure() {
 				 *
 				 * @param string $html_link_tag The HTML link tag with a URI and other attributes.
 				 */
-				echo apply_filters( 'atom_enclosure', $html_link_tag );
+				echo apply_filters( 'atom_enclosure', '<link href="' . esc_url( trim( $enclosure[0] ) ) . '" rel="enclosure" length="' . absint( trim( $enclosure[1] ) ) . '" type="' . esc_attr( trim( $enclosure[2] ) ) . '" />' . "\n" );
 			}
 		}
 	}
@@ -565,12 +530,12 @@ function atom_enclosure() {
 /**
  * Determine the type of a string of data with the data formatted.
  *
- * Tell whether the type is text, HTML, or XHTML, per RFC 4287 section 3.1.
+ * Tell whether the type is text, html, or xhtml, per RFC 4287 section 3.1.
  *
  * In the case of WordPress, text is defined as containing no markup,
- * XHTML is defined as "well formed", and HTML as tag soup (i.e., the rest).
+ * xhtml is defined as "well formed", and html as tag soup (i.e., the rest).
  *
- * Container div tags are added to XHTML values, per section 3.1.1.3.
+ * Container div tags are added to xhtml values, per section 3.1.1.3.
  *
  * @link http://www.atomenabled.org/developers/syndication/atom-format-spec.php#rfc.section.3.1
  *
@@ -594,7 +559,6 @@ function prep_atom_text_construct( $data ) {
 	xml_parse( $parser, '<div>' . $data . '</div>', true );
 	$code = xml_get_error_code( $parser );
 	xml_parser_free( $parser );
-	unset( $parser );
 
 	if ( ! $code ) {
 		if ( strpos( $data, '<' ) === false ) {
@@ -658,7 +622,7 @@ function rss2_site_icon() {
  * @return string Correct link for the atom:self element.
  */
 function get_self_link() {
-	$host = parse_url( home_url() );
+	$host = @parse_url( home_url() );
 	return set_url_scheme( 'http://' . $host['host'] . wp_unslash( $_SERVER['REQUEST_URI'] ) );
 }
 
@@ -807,7 +771,6 @@ function fetch_feed( $url ) {
 	$feed->set_feed_url( $url );
 	/** This filter is documented in wp-includes/class-wp-feed-cache-transient.php */
 	$feed->set_cache_duration( apply_filters( 'wp_feed_cache_transient_lifetime', 12 * HOUR_IN_SECONDS, $url ) );
-
 	/**
 	 * Fires just before processing the SimplePie feed object.
 	 *
@@ -817,7 +780,6 @@ function fetch_feed( $url ) {
 	 * @param string|string[] $url  URL of feed or array of URLs of feeds to retrieve.
 	 */
 	do_action_ref_array( 'wp_feed_options', array( &$feed, $url ) );
-
 	$feed->init();
 	$feed->set_output_encoding( get_option( 'blog_charset' ) );
 
