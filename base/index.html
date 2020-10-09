@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/images/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <title>Webフロントエンジニア | 佐藤大地</title>
+  </head>
+  <body>
+    <!-- Start Header -->
+    <header class="header">
+      <div class="inner">
+        <h1 class="header-logo">
+          <a href="#">
+            <img
+              src="./assets/images/logo.png"
+              alt="佐藤大地のポートフォリオ"
+            />
+          </a>
+        </h1>
+        <div class="nav-toggle">
+          <span class="toggle-line"></span>
+        </div>
+        <nav class="header-nav">
+          <ul class="nav-menu">
+            <li class="nav-item js-smooth-scroll"><a href="#">Home</a></li>
+            <li class="nav-item js-smooth-scroll">
+              <a href="#about">About</a>
+            </li>
+            <li class="nav-item js-smooth-scroll">
+              <a href="#works">works</a>
+            </li>
+            <li class="nav-item js-smooth-scroll">
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="bg-black"></div>
+    </header>
+    <!-- End Header -->
+    <!-- Start Main -->
+    <main>
+      <!-- Start First View -->
+      <section class="first-view">
+        <div class="catch">
+          <h2 class="name">Daichi Sato</h2>
+          <p class="subtitle">WEB FRONT-END ENGINEER</p>
+          <p class="c-button-wrap">
+            <a class="c-button contact-button" href="#contact"> Contact </a>
+          </p>
+        </div>
+      </section>
+      <!-- End First View -->
+
+      <!-- Start About -->
+      <section id="about" class="about c-section">
+        <h2
+          class="c-section-title works-title animated"
+          data-animate="fadeInLeft"
+        >
+          About
+        </h2>
+        <div class="c-container">
+          <div class="profile">
+            <h3 class="animated" data-animate="fadeInLeft">Profile</h3>
+            <div class="profile-wrap animated" data-animate="fadeInLeft">
+              <div class="avatar">
+                <img src="./assets/images/icon.png" alt="佐藤大地" />
+              </div>
+              <div class="profile-box">
+                <ul class="profile-list">
+                  <li
+                    class="profile-item animated slow"
+                    data-animate="fadeInUp"
+                  >
+                    Name: 佐藤大地
+                  </li>
+                  <li
+                    class="profile-item animated slow"
+                    data-animate="fadeInUp"
+                  >
+                    University: 新潟大学経済学部
+                  </li>
+                  <li
+                    class="profile-item animated slow"
+                    data-animate="fadeInUp"
+                  >
+                    Birthday: 1996/2/28
+                  </li>
+                </ul>
+                <p class="career animated slow" data-animate="fadeInUp">
+                  2018年4月、新卒で食品スーパーマーケットに入社し、部門チーフとして2019年6月まで働く。<br />
+                  WordPressでブログ運営を始めたことからプログラミング、特にフロントエンドの領域に関心を持ち、2019年8月から勉強を開始。<br />
+                  独学でHTML,CSSのマークアップやJavaScript,jQueryを用いたwebページを作るところから始め、現在はReactなどSPAフレームワークを用いたwebアプリケーション開発のスキルアップを目指しています。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="skills animated" data-animate="fadeInLeft">
+            <h3>Skills</h3>
+            <div class="skills-wrap">
+              <p class="subtitle">佐藤大地が提供できる技術は以下の通りです。</p>
+              <div class="skills-grid">
+                <dl class="animated" data-animate="fadeInUp">
+                  <dt>マークアップ</dt>
+                  <dd>HTML5, CSS3, BootStrap4</dd>
+                </dl>
+                <dl class="animated" data-animate="fadeInUp">
+                  <dt>フロントエンド</dt>
+                  <dd>
+                    JavaScript(ES6), React, Redux, TypeScript, Sass, Webpack,
+                    Babel, WordPress
+                  </dd>
+                </dl>
+                <dl class="animated" data-animate="fadeInUp">
+                  <dt>その他ツール</dt>
+                  <dd>git, npmなど</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End About -->
+
+      <!-- Start Works -->
+      <section id="works" class="works c-section">
+        <h2
+          class="c-section-title works-title animated"
+          data-animate="fadeInLeft"
+        >
+          Works
+        </h2>
+        <div class="c-container">
+          <div class="works-wrap">
+            <ul class="work-list">
+              <li class="work-card animated" data-animate="fadeInUp">
+                <a href="">
+                  <div class="bg-config img-wrap">
+                    <img
+                      src="./assets/images/works-portfolio.png"
+                      alt="佐藤大地のポートフォリオ"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 class="work-title">佐藤大地のポートフォリオ</h3>
+                    <p class="category">
+                      Web制作 | デザイン | レスポンシブ | アニメーション
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="work-card animated" data-animate="fadeInUp">
+                <a href="">
+                  <div class="bg-config img-wrap">
+                    <img
+                      src="./assets/images/works-portfolio.png"
+                      alt="佐藤大地のポートフォリオ"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 class="work-title">佐藤大地のポートフォリオ</h3>
+                    <p class="category">
+                      Web制作 | デザイン | レスポンシブ | アニメーション
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="work-card animated" data-animate="fadeInUp">
+                <a href="">
+                  <div class="bg-config img-wrap">
+                    <img
+                      src="./assets/images/works-portfolio.png"
+                      alt="佐藤大地のポートフォリオ"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 class="work-title">佐藤大地のポートフォリオ</h3>
+                    <p class="category">
+                      Web制作 | デザイン | レスポンシブ | アニメーション
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="work-card animated" data-animate="fadeInUp">
+                <a href="">
+                  <div class="bg-config img-wrap">
+                    <img
+                      src="./assets/images/works-portfolio.png"
+                      alt="佐藤大地のポートフォリオ"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 class="work-title">佐藤大地のポートフォリオ</h3>
+                    <p class="category">
+                      Web制作 | デザイン | レスポンシブ | アニメーション
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="work-card animated" data-animate="fadeInUp">
+                <a href="">
+                  <div class="bg-config img-wrap">
+                    <img
+                      src="./assets/images/works-portfolio.png"
+                      alt="佐藤大地のポートフォリオ"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h3 class="work-title">佐藤大地のポートフォリオ</h3>
+                    <p class="category">
+                      Web制作 | デザイン | レスポンシブ | アニメーション
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- End works -->
+
+      <!-- Start Contact -->
+      <section id="contact" class="contact c-section">
+        <h2
+          class="c-section-title works-title animated"
+          data-animate="fadeInLeft"
+        >
+          Contact
+        </h2>
+        <div class="c-container">
+          <div class="form-wrap">
+            <form action method="POST">
+              <div class="form-input">
+                <label for="name">お名前 *</label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="山田 太郎"
+                  required
+                />
+              </div>
+              <div class="form-input">
+                <label for="mail">メールアドレス *</label>
+                <input
+                  id="mail"
+                  type="email"
+                  name="mail"
+                  placeholder="your@example.com"
+                  required
+                />
+              </div>
+              <div class="form-input">
+                <label for="comment">お問い合わせ内容 *</label>
+                <textarea
+                  name="description"
+                  id="comment"
+                  rows="10"
+                  required
+                ></textarea>
+              </div>
+              <div class="c-button-wrap">
+                <button class="c-button confirm-button" type="button">
+                  内容を確認する
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact -->
+    </main>
+    <!-- End Main -->
+
+    <!-- Start Footer -->
+    <footer class="footer">
+      <div class="inner">
+        <h3>SNS</h3>
+        <ul class="icons">
+          <li class="icon">
+            <a href="https://github.com/daichan2019" target="_blank"
+              ><i class="fab fa-github fa-fw fa-3x"></i
+            ></a>
+          </li>
+          <li class="icon">
+            <a href="https://twitter.com/vanilla_dev" target="_blank"
+              ><i class="fab fa-twitter fa-fw fa-3x"></i
+            ></a>
+          </li>
+        </ul>
+        <p class="built-with">This website built with:</p>
+        <ul class="icons">
+          <li class="icon"><i class="fab fa-html5 fa-fw fa-3x"></i></li>
+          <li class="icon"><i class="fab fa-css3-alt fa-fw fa-3x"></i></li>
+          <li class="icon"><i class="fab fa-js-square fa-fw fa-3x"></i></li>
+          <li class="icon"><i class="fab fa-wordpress fa-fw fa-3x"></i></li>
+        </ul>
+        <p class="copyright">
+          <small>Copyright©Daichi Sato. All Rights Reserved.</small>
+        </p>
+      </div>
+    </footer>
+    <!-- End Footer -->
+    <script src="./assets/js/index.js"></script>
+  </body>
+</html>
