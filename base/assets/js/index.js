@@ -48,9 +48,34 @@ jQuery(document).ready(function () {
     });
   };
 
+  const swiperConfig = function () {
+    const mySwiper = new Swiper(".swiper-container", {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        960: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+      // autoplay: {
+      //   delay: 2000,
+      // },
+    });
+  };
+
   const init = () => {
     toggleHeaderNav();
     animateWithScroll();
+    swiperConfig();
   };
 
   init();
