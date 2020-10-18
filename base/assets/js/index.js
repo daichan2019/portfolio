@@ -66,9 +66,9 @@ jQuery(document).ready(function () {
           spaceBetween: 30,
         },
       },
-      // autoplay: {
-      //   delay: 2000,
-      // },
+      autoplay: {
+        delay: 2000,
+      },
     });
   };
 

@@ -26,16 +26,15 @@
       </div>
       <nav class="header-nav">
         <ul class="nav-menu">
-          <li class="nav-item js-smooth-scroll"><a href=<?php echo home_url();?>>Home</a></li>
-          <li class="nav-item js-smooth-scroll">
-            <a href="#about">About</a>
-          </li>
-          <li class="nav-item js-smooth-scroll">
-            <a href="#works">works</a>
-          </li>
-          <li class="nav-item js-smooth-scroll">
-            <a href="#contact">Contact</a>
-          </li>
+          <?php
+            wp_nav_menu(
+                array(
+                  'theme_location' => 'place_global',
+                  'items_wrap' => '<ul class="nav-menu">%3$s</ul>',
+                  'container' => false,
+                )
+            );
+            ?>
         </ul>
       </nav>
     </div>

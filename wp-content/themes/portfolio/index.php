@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <!-- Start Main -->
-<main>
+<main class="top-page">
   <!-- Start First View -->
   <section class="first-view">
     <div class="catch">
@@ -14,156 +14,110 @@
   <!-- End First View -->
 
   <!-- Start About -->
-  <section id="about" class="about c-section">
-    <h2 class="c-section-title works-title animated" data-animate="fadeInLeft">
-          About
-        </h2>
+  <section class="about c-section">
     <div class="c-container">
-      <div class="profile">
-        <h3 class="animated" data-animate="fadeInLeft">Profile</h3>
-        <div class="profile-wrap animated" data-animate="fadeInLeft">
-          <div class="avatar">
-            <img src="<?php echo get_template_directory_uri();?>/assets/images/icon.png" alt="佐藤大地" />
-          </div>
-          <div class="profile-box">
-            <ul class="profile-list">
-              <li class="profile-item animated slow" data-animate="fadeInUp">
-                Name: 佐藤大地
-              </li>
-              <li class="profile-item animated slow" data-animate="fadeInUp">
-                University: 新潟大学経済学部
-              </li>
-              <li class="profile-item animated slow" data-animate="fadeInUp">
-                Birthday: 1996/2/28
-              </li>
-            </ul>
-            <p class="career animated slow" data-animate="fadeInUp">
-                  2018年4月、新卒で食品スーパーマーケットに入社し、部門チーフとして2019年6月まで働く。<br />
-                  WordPressでブログ運営を始めたことからプログラミング、特にフロントエンドの領域に関心を持ち、2019年8月から勉強を開始。<br />
-                  独学でHTML,CSSのマークアップやJavaScript,jQueryを用いたwebページを作るところから始め、現在はReactなどSPAフレームワークを用いたwebアプリケーション開発のスキルアップを目指しています。
+      <div class="heading-wrap">
+        <h3 class="top-heading animated slow" data-animate="fadeInUp">
+              About
+            </h3>
+      </div>
+      <div class="c-profile-wrap">
+        <div class="avatar">
+          <img src="<?php echo get_template_directory_uri();?>/assets/images/icon.png" alt="佐藤大地" />
+        </div>
+        <div class="profile-box">
+          <ul class="profile-list">
+            <li class="profile-item animated slow" data-animate="fadeInUp">
+              Name: 佐藤大地
+            </li>
+            <li class="profile-item animated slow" data-animate="fadeInUp">
+              University: 新潟大学経済学部
+            </li>
+            <li class="profile-item animated slow" data-animate="fadeInUp">
+              Birthday: 1996/2/28
+            </li>
+          </ul>
+          <div class="text-wrap">
+            <p class="animated slow" data-animate="fadeInUp">
+                  東京のスタートアップ企業でWebアプリ開発やweb制作をしているWebエンジニア。
+                  <br />
+                  専門領域はフロントエンドです。
+                </p>
+            <p class="animated slow" data-animate="fadeInUp">
+                  コーヒーとレモンサワーが好物。<br />
+                  心にいつも音楽を。趣味はギターの演奏です。
                 </p>
           </div>
         </div>
       </div>
-      <div class="skills animated" data-animate="fadeInLeft">
-        <h3>Skills</h3>
-        <div class="skills-wrap">
-          <p class="subtitle">佐藤大地が提供できる技術は以下の通りです。</p>
-          <div class="skills-grid">
-            <dl class="animated" data-animate="fadeInUp">
-              <dt>マークアップ</dt>
-              <dd>HTML5, CSS3, BootStrap4</dd>
-            </dl>
-            <dl class="animated" data-animate="fadeInUp">
-              <dt>フロントエンド</dt>
-              <dd>
-                JavaScript(ES6), React, Redux, TypeScript, Sass, Webpack,
-                Babel, WordPress
-              </dd>
-            </dl>
-            <dl class="animated" data-animate="fadeInUp">
-              <dt>その他ツール</dt>
-              <dd>git, npmなど</dd>
-            </dl>
-          </div>
-        </div>
+      <div class="c-button-wrap">
+        <a href="<?php echo home_url('/about'); ?>" class="c-button">詳しくはこちら</a>
       </div>
     </div>
   </section>
   <!-- End About -->
 
   <!-- Start Works -->
-  <section id="works" class="works c-section">
-    <h2 class="c-section-title works-title animated" data-animate="fadeInLeft">
-          Works
-        </h2>
+  <section class="works c-section">
     <div class="c-container">
-      <div class="works-wrap">
-        <ul class="work-list">
-          <li class="work-card animated" data-animate="fadeInUp">
-            <a href="">
-              <div class="bg-config img-wrap">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/works-portfolio.png" alt="佐藤大地のポートフォリオ" />
+      <div class="heading-wrap">
+        <h3 class="top-heading animated slow" data-animate="fadeInUp">
+              Works
+            </h3>
+      </div>
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <?php
+            $the_query = subLoop();
+            if ($the_query->have_posts()) :
+              while ($the_query->have_posts()) : $the_query->the_post();
+          ?>
+          <div class="swiper-slide">
+            <a href="<?php the_permalink() ?>">
+              <h4 class="slide-heading"><?php the_title(); ?></h4>
+              <div class="img-wrap">
+                <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id() );?>" alt="">
               </div>
-              <div class="card-body">
-                <h3 class="work-title">佐藤大地のポートフォリオ</h3>
-                <p class="category">
-                      Web制作 | デザイン | レスポンシブ | アニメーション
-                    </p>
-              </div>
+              <p>
+                <?php limitCharacter($post, 90); ?>
+              </p>
             </a>
-          </li>
-          <li class="work-card animated" data-animate="fadeInUp">
-            <a href="">
-              <div class="bg-config img-wrap">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/works-portfolio.png" alt="佐藤大地のポートフォリオ" />
-              </div>
-              <div class="card-body">
-                <h3 class="work-title">佐藤大地のポートフォリオ</h3>
-                <p class="category">
-                      Web制作 | デザイン | レスポンシブ | アニメーション
-                    </p>
-              </div>
-            </a>
-          </li>
-          <li class="work-card animated" data-animate="fadeInUp">
-            <a href="">
-              <div class="bg-config img-wrap">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/works-portfolio.png" alt="佐藤大地のポートフォリオ" />
-              </div>
-              <div class="card-body">
-                <h3 class="work-title">佐藤大地のポートフォリオ</h3>
-                <p class="category">
-                      Web制作 | デザイン | レスポンシブ | アニメーション
-                    </p>
-              </div>
-            </a>
-          </li>
-          <li class="work-card animated" data-animate="fadeInUp">
-            <a href="">
-              <div class="bg-config img-wrap">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/works-portfolio.png" alt="佐藤大地のポートフォリオ" />
-              </div>
-              <div class="card-body">
-                <h3 class="work-title">佐藤大地のポートフォリオ</h3>
-                <p class="category">
-                      Web制作 | デザイン | レスポンシブ | アニメーション
-                    </p>
-              </div>
-            </a>
-          </li>
-          <li class="work-card animated" data-animate="fadeInUp">
-            <a href="">
-              <div class="bg-config img-wrap">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/works-portfolio.png" alt="佐藤大地のポートフォリオ" />
-              </div>
-              <div class="card-body">
-                <h3 class="work-title">佐藤大地のポートフォリオ</h3>
-                <p class="category">
-                      Web制作 | デザイン | レスポンシブ | アニメーション
-                    </p>
-              </div>
-            </a>
-          </li>
-        </ul>
+          </div>
+          <?php
+              endwhile;
+            endif;
+            wp_reset_postdata();
+          ?>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="c-button-wrap">
+        <a href="<?php echo home_url('/works'); ?>" class="c-button">全ての事例を見る</a>
       </div>
     </div>
   </section>
   <!-- End works -->
 
   <!-- Start Contact -->
-  <section id="contact" class="contact c-section">
-    <h2 class="c-section-title works-title animated" data-animate="fadeInLeft">
-          Contact
-        </h2>
+  <section class="contact c-section">
     <div class="c-container">
-      <div class="form-wrap">
-        <?php echo do_shortcode('[mwform_formkey key="5"]'); ?>
+      <div class="heading-wrap">
+        <h3 class="top-heading animated slow" data-animate="fadeInUp">
+              Contact
+            </h3>
+      </div>
+      <p class="text animated slow" data-animate="fadeInUp">
+            企業HPなどのWebサイト制作、アプリ開発、システム開発などのお見積もり、ご相談はお気軽にご連絡ください。<br />
+            お客様だけでなく、エンドユーザーにも喜んでいただけるよう技術を提供します。
+          </p>
+      <div class="c-button-wrap">
+        <a href="<?php echo home_url('/contact'); ?>" class="c-button">お問い合わせ</a>
       </div>
     </div>
   </section>
   <!-- End Contact -->
-
 </main>
 <!-- End Main -->
 <?php get_footer(); ?>

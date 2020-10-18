@@ -6,8 +6,10 @@ Template Name: contact-complete
 
 <?php get_header(); ?>
 <!-- Start Main -->
-<main class="contact-page">
-  <section class="contact-complete contact c-section">
+<!-- Start Main -->
+<main class="c-individual-page">
+  <!-- Start Contact -->
+  <section class="contact c-section">
     <h2 class="c-section-title works-title animated" data-animate="fadeInLeft">
           Contact
         </h2>
@@ -23,9 +25,7 @@ Template Name: contact-complete
                 後日担当者よりご返信いたしますので、しばらくお待ちください。
               </p>
         <div class="c-button-wrap">
-          <button class="c-button submit-button" type="button" onclick="location.href='<?php echo home_url();?>'">
-            トップページへ戻る
-          </button>
+          <a href="'<?php echo home_url();?>'" class="c-button">トップページへ戻る</a>
         </div>
       </div>
     </div>
