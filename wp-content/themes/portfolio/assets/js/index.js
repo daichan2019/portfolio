@@ -67,7 +67,7 @@ jQuery(document).ready(function () {
         },
       },
       autoplay: {
-        delay: 2000,
+        delay: 5000,
       },
     });
   }

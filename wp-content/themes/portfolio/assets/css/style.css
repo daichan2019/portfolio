@@ -426,6 +426,8 @@ textarea {
 .single-page .jumbotron {
   background-position: center center;
   background-size: cover;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 6px 5px rgba(255, 255, 255, 0.4);
   padding-top: 55.9%;
 }
 .single-page .text-content {
