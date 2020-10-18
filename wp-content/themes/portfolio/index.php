@@ -7,7 +7,7 @@
       <h2 class="name">Daichi Sato</h2>
       <p class="subtitle">WEB FRONT-END ENGINEER</p>
       <p class="c-button-wrap">
-            <a class="c-button contact-button" href="#contact"> Contact </a>
+            <a class="c-button contact-button" href="<?php echo home_url('/contact'); ?>"> Contact </a>
           </p>
     </div>
   </section>
