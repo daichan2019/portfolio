@@ -601,7 +601,7 @@ class Custom_Background {
 		);
 
 		$size = 'thumbnail';
-		if ( in_array( $_POST['size'], $sizes, true ) ) {
+		if ( in_array( $_POST['size'], $sizes ) ) {
 			$size = esc_attr( $_POST['size'] );
 		}
 

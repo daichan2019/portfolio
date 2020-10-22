@@ -187,8 +187,7 @@ class Requests {
 
 		// Don't search for a transport if it's already been done for these $capabilities
 		if (isset(self::$transport[$cap_string]) && self::$transport[$cap_string] !== null) {
-			$class = self::$transport[$cap_string];
-			return new $class();
+			return new self::$transport[$cap_string]();
 		}
 		// @codeCoverageIgnoreEnd
 
@@ -215,8 +214,7 @@ class Requests {
 			throw new Requests_Exception('No working transports found', 'notransport', self::$transports);
 		}
 
-		$class = self::$transport[$cap_string];
-		return new $class();
+		return new self::$transport[$cap_string]();
 	}
 
 	/**#@+

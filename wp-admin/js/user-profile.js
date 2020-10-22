@@ -2,10 +2,10 @@
  * @output wp-admin/js/user-profile.js
  */
 
-/* global ajaxurl, pwsL10n */
+/* global ajaxurl, pwsL10n, userProfileL10n */
 (function($) {
 	var updateLock = false,
-		__ = wp.i18n.__,
+
 		$pass1Row,
 		$pass1,
 		$pass2,
@@ -39,7 +39,7 @@
 		}
 
 		// Once zxcvbn loads, passwords strength is known.
-		$( '#pw-weak-text-label' ).text( __( 'Confirm use of weak password' ) );
+		$( '#pw-weak-text-label' ).html( userProfileL10n.warnWeak );
 	}
 
 	function bindPass1() {
@@ -64,10 +64,10 @@
 	function resetToggle( show ) {
 		$toggleButton
 			.attr({
-				'aria-label': show ? __( 'Show password' ) : __( 'Hide password' )
+				'aria-label': show ? userProfileL10n.ariaShow : userProfileL10n.ariaHide
 			})
 			.find( '.text' )
-				.text( show ? __( 'Show' ) : __( 'Hide' ) )
+				.text( show ? userProfileL10n.show : userProfileL10n.hide )
 			.end()
 			.find( '.dashicons' )
 				.removeClass( show ? 'dashicons-hidden' : 'dashicons-visibility' )
@@ -220,7 +220,7 @@
 			return;
 		}
 
-		strength = wp.passwordStrength.meter( pass1, wp.passwordStrength.userInputDisallowedList(), pass1 );
+		strength = wp.passwordStrength.meter( pass1, wp.passwordStrength.userInputBlacklist(), pass1 );
 
 		switch ( strength ) {
 			case -1:
@@ -402,7 +402,7 @@
 	/* Warn the user if password was generated but not saved */
 	$( window ).on( 'beforeunload', function () {
 		if ( true === updateLock ) {
-			return __( 'Your new password has not been saved.' );
+			return userProfileL10n.warn;
 		}
 	} );
 

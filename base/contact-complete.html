@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/images/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans:wght@300;400;600;700&display=swap"
       rel="stylesheet"
@@ -16,6 +17,10 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <title>Webフロントエンジニア | 佐藤大地</title>
@@ -37,10 +42,16 @@
         </div>
         <nav class="header-nav">
           <ul class="nav-menu">
-            <li class="nav-item"><a href="#">Home</a></li>
-            <li class="nav-item"><a href="#about">About</a></li>
-            <li class="nav-item"><a href="#works">works</a></li>
-            <li class="nav-item"><a href="#contact">Contact</a></li>
+            <li class="nav-item js-smooth-scroll"><a href="#">Home</a></li>
+            <li class="nav-item js-smooth-scroll">
+              <a href="#about">About</a>
+            </li>
+            <li class="nav-item js-smooth-scroll">
+              <a href="#works">works</a>
+            </li>
+            <li class="nav-item js-smooth-scroll">
+              <a href="#contact">Contact</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -48,8 +59,9 @@
     </header>
     <!-- End Header -->
     <!-- Start Main -->
-    <main class="contact-page">
-      <section class="contact-complete contact c-section">
+    <main class="c-individual-page">
+      <!-- Start Contact -->
+      <section class="contact c-section">
         <h2
           class="c-section-title works-title animated"
           data-animate="fadeInLeft"
@@ -64,15 +76,16 @@
                 後日担当者よりご返信いたしますので、しばらくお待ちください。
               </p>
               <div class="c-button-wrap">
-                <button class="c-button confirm-button" type="button">
-                  トップページへ戻る
-                </button>
+                <a href="" class="c-button">トップページへ戻る</a>
               </div>
             </form>
           </div>
         </div>
       </section>
+      <!-- End Contact -->
     </main>
+    <!-- End Main -->
+
     <!-- Start Footer -->
     <footer class="footer">
       <div class="inner">
@@ -102,6 +115,7 @@
       </div>
     </footer>
     <!-- End Footer -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="./assets/js/index.js"></script>
   </body>
 </html>

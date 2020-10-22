@@ -62,12 +62,12 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 	 *
 	 * @since 3.1.0
 	 *
-	 * @global string $mode List table view mode.
 	 * @global string $s
+	 * @global string $mode
 	 * @global wpdb   $wpdb WordPress database abstraction object.
 	 */
 	public function prepare_items() {
-		global $mode, $s, $wpdb;
+		global $s, $mode, $wpdb;
 
 		if ( ! empty( $_REQUEST['mode'] ) ) {
 			$mode = 'excerpt' === $_REQUEST['mode'] ? 'excerpt' : 'list';
@@ -213,6 +213,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 	 * @since 5.3.0
 	 *
 	 * @return array
+	 *
 	 */
 	protected function get_views() {
 		$counts = wp_count_sites();
@@ -289,8 +290,8 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 		if ( current_user_can( 'delete_sites' ) ) {
 			$actions['delete'] = __( 'Delete' );
 		}
-		$actions['spam']    = _x( 'Mark as spam', 'site' );
-		$actions['notspam'] = _x( 'Not spam', 'site' );
+		$actions['spam']    = _x( 'Mark as Spam', 'site' );
+		$actions['notspam'] = _x( 'Not Spam', 'site' );
 
 		return $actions;
 	}
@@ -575,7 +576,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * @global string $mode List table view mode.
+	 * @global string $mode
 	 */
 	public function display_rows() {
 		foreach ( $this->items as $blog ) {

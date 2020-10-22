@@ -10,10 +10,17 @@ if ( ! window.wp ) {
 
 wp.themePluginEditor = (function( $ ) {
 	'use strict';
-	var component, TreeLinks,
-		__ = wp.i18n.__, _n = wp.i18n._n, sprintf = wp.i18n.sprintf;
+	var component, TreeLinks;
 
 	component = {
+		l10n: {
+			lintError: {
+				singular: '',
+				plural: ''
+			},
+			saveAlert: '',
+			saveError: ''
+		},
 		codeEditor: {},
 		instance: null,
 		noticeElements: {},
@@ -27,8 +34,8 @@ wp.themePluginEditor = (function( $ ) {
 	 * @since 4.9.0
 	 *
 	 * @param {jQuery}         form - Form element.
-	 * @param {Object}         settings - Settings.
-	 * @param {Object|boolean} settings.codeEditor - Code editor settings (or `false` if syntax highlighting is disabled).
+	 * @param {object}         settings - Settings.
+	 * @param {object|boolean} settings.codeEditor - Code editor settings (or `false` if syntax highlighting is disabled).
 	 * @return {void}
 	 */
 	component.init = function init( form, settings ) {
@@ -68,7 +75,7 @@ wp.themePluginEditor = (function( $ ) {
 
 		$( window ).on( 'beforeunload', function() {
 			if ( component.dirty ) {
-				return __( 'The changes you made will be lost if you navigate away from this page.' );
+				return component.l10n.saveAlert;
 			}
 			return undefined;
 		} );
@@ -117,7 +124,7 @@ wp.themePluginEditor = (function( $ ) {
 	 * Constrain tabbing within the warning modal.
 	 *
 	 * @since 4.9.0
-	 * @param {Object} event jQuery event object.
+	 * @param {object} event jQuery event object.
 	 * @return {void}
 	 */
 	component.constrainTabbing = function( event ) {
@@ -226,7 +233,7 @@ wp.themePluginEditor = (function( $ ) {
 			var notice = $.extend(
 				{
 					code: 'save_error',
-					message: __( 'Something went wrong. Your change may not have been saved. Please try again. There is also a chance that you may need to manually fix and upload the file over FTP.' )
+					message: component.l10n.saveError
 				},
 				response,
 				{
@@ -254,7 +261,7 @@ wp.themePluginEditor = (function( $ ) {
 	 *
 	 * @since 4.9.0
 	 *
-	 * @param {Object}   notice - Notice.
+	 * @param {object}   notice - Notice.
 	 * @param {string}   notice.code - Code.
 	 * @param {string}   notice.type - Type.
 	 * @param {string}   notice.message - Message.
@@ -368,23 +375,20 @@ wp.themePluginEditor = (function( $ ) {
 		 * @return {void}
 		 */
 		codeEditorSettings.onUpdateErrorNotice = function onUpdateErrorNotice( errorAnnotations ) {
-			var noticeElement;
+			var message, noticeElement;
 
 			component.submitButton.toggleClass( 'disabled', errorAnnotations.length > 0 );
 
 			if ( 0 !== errorAnnotations.length ) {
+				if ( 1 === errorAnnotations.length ) {
+					message = component.l10n.lintError.singular.replace( '%d', '1' );
+				} else {
+					message = component.l10n.lintError.plural.replace( '%d', String( errorAnnotations.length ) );
+				}
 				noticeElement = component.addNotice({
 					code: 'lint_errors',
 					type: 'error',
-					message: sprintf(
-						/* translators: %s: Error count. */
-						_n(
-							'There is %s error which must be fixed before you can update this file.',
-							'There are %s errors which must be fixed before you can update this file.',
-							errorAnnotations.length
-						),
-						String( errorAnnotations.length )
-					),
+					message: message,
 					dismissible: false
 				});
 				noticeElement.find( 'input[type=checkbox]' ).on( 'click', function() {
@@ -1000,27 +1004,3 @@ wp.themePluginEditor = (function( $ ) {
 
 	return component;
 })( jQuery );
-
-/**
- * Removed in 5.5.0, needed for back-compatibility.
- *
- * @since 4.9.0
- * @deprecated 5.5.0
- *
- * @type {object}
- */
-wp.themePluginEditor.l10n = wp.themePluginEditor.l10n || {
-	saveAlert: '',
-	saveError: '',
-	lintError: {
-		alternative: 'wp.i18n',
-		func: function() {
-			return {
-				singular: '',
-				plural: ''
-			};
-		}
-	}
-};
-
-wp.themePluginEditor.l10n = window.wp.deprecateL10nObject( 'wp.themePluginEditor.l10n', wp.themePluginEditor.l10n );

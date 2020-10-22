@@ -42,8 +42,11 @@ if ( ! current_user_can( 'upload_files' ) ) {
 if ( isset( $_REQUEST['attachment_id'] ) && intval( $_REQUEST['attachment_id'] ) && $_REQUEST['fetch'] ) {
 	$id   = intval( $_REQUEST['attachment_id'] );
 	$post = get_post( $id );
-	if ( 'attachment' !== $post->post_type ) {
+	if ( 'attachment' != $post->post_type ) {
 		wp_die( __( 'Invalid post type.' ) );
+	}
+	if ( ! current_user_can( 'edit_post', $id ) ) {
+		wp_die( __( 'Sorry, you are not allowed to edit this item.' ) );
 	}
 
 	switch ( $_REQUEST['fetch'] ) {
@@ -52,11 +55,7 @@ if ( isset( $_REQUEST['attachment_id'] ) && intval( $_REQUEST['attachment_id'] )
 			if ( $thumb_url ) {
 				echo '<img class="pinkynail" src="' . esc_url( $thumb_url[0] ) . '" alt="" />';
 			}
-			if ( current_user_can( 'edit_post', $id ) ) {
-				echo '<a class="edit-attachment" href="' . esc_url( get_edit_post_link( $id ) ) . '" target="_blank">' . _x( 'Edit', 'media item' ) . '</a>';
-			} else {
-				echo '<span class="edit-attachment">' . _x( 'Success', 'media item' ) . '</span>';
-			}
+			echo '<a class="edit-attachment" href="' . esc_url( get_edit_post_link( $id ) ) . '" target="_blank">' . _x( 'Edit', 'media item' ) . '</a>';
 
 			// Title shouldn't ever be empty, but use filename just in case.
 			$file  = get_attached_file( $post->ID );
